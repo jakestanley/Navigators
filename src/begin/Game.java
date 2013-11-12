@@ -1,0 +1,53 @@
+package begin;
+
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import interfaces.Screen;
+import interfaces.StartScreen;
+
+import javax.swing.JFrame;
+
+import entities.Player;
+import entities.Ship;
+import asciiPanel.AsciiPanel;
+ 
+public class Game extends JFrame implements KeyListener { // implement applet later 
+
+	private static final long serialVersionUID = 8475393520489155511L;
+	public static Ship ship;
+	public static Player player;
+    private AsciiPanel terminal;
+    private Screen screen;
+ 
+    public Game(){
+        super("Navigators"); // name of window - can this be run in a game window?
+        ship = new Ship();
+        player = new Player();
+        terminal = new AsciiPanel();
+        add(terminal); // what does this do?
+        pack(); // what does this do?
+        screen = new StartScreen();
+        addKeyListener(this);
+        repaint();
+    }
+    
+    public void repaint(){
+    	terminal.clear();
+    	screen.displayOutput(terminal);
+    	super.repaint();
+    }
+    public void keyPressed(KeyEvent e){
+    	screen = screen.respondToUserInput(e);
+    	repaint();
+    }
+    
+    public void keyReleased(KeyEvent e){
+    	
+    }
+    
+    public void keyTyped(KeyEvent e){
+    	
+    }
+
+}
