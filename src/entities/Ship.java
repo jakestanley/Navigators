@@ -7,6 +7,7 @@ public class Ship {
 	private String name;
 	private float hullDamage;
 	private float shieldLevel;
+	private float x, y, z; // improve.
 	public ArrayList<Crew> crewList; // TODO tidy this up
 	
 	public Ship(){
