@@ -1,7 +1,8 @@
 package entities;
 
 /**
- *  The Crew class - Jacob Stanley, 2013 
+ *  The Crew class
+ *  @author stanners 
  * 
  *  I would like age to be dynamic, with a date of birth, etc. I would prefer individual proficiencies, 
  *  as opposed to a set skill level for everything, but I'll work on that when I've worked out what 
@@ -24,14 +25,24 @@ package entities;
  *  protective equipment, they will last for a long time (again, encouraging crew management proactivity). 
  *  Another slight downside is that elderly crew members will commands much higher salaries.
  *  
+ *  Crew need to be able to carry things. They should be able to receive (costly) training to improve 
+ *  their proficiencies. Working with crew members who share a common language will improve their 
+ *  proficiencies faster.
+ *  
+ *  TODO add stuff from physical notes - socialisation, affects morale positively and negatively based on 
+ *  language, race, personality?, religion, place of origin, age, gender, etc, etc. Simulated prejudice. 
+ *  funerals? tribunals? weddings? holidays? religious holidays?
+ *  
  */
 
 public class Crew {
 
 	private int gender;
 	private int age; // this will be in years
-	private int skillLevel;
+	private int skillLevel; // break this down into individual proficiencies.
 	private int morale;
+	private int x; // x position on map
+	private int y; // y position on map
 	private float weight; // measured in kilograms, of course
 	private float height; // and metres here [metric ftw]
 	private float health; // TODO add diseases, ailments and disabilities, etc??
