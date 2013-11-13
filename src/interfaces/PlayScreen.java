@@ -63,6 +63,9 @@ public class PlayScreen implements Screen {
         		if(newLetter == "r".charAt(0)){ // TODO make this not ugly...
         			System.out.println("r was pressed");
         			return new CrewScreen();
+        		} else if(newLetter == "i".charAt(0)){
+        			System.out.println("i was pressed");
+        			return new RogueMap();
         		}
         		// use letters as usual
         	}

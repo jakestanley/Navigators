@@ -3,6 +3,7 @@ package begin;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import interfaces.RogueMap;
 import interfaces.Screen;
 import interfaces.StartScreen;
 
@@ -28,7 +29,8 @@ public class Game extends JFrame implements KeyListener { // implement applet la
         terminal = new AsciiPanel();
         add(terminal); // what does this do?
         pack(); // what does this do?
-        screen = new StartScreen();
+//        screen = new StartScreen(); // for map testing, TODO uncomment
+        screen = new RogueMap();
         addKeyListener(this);
         repaint();
     }

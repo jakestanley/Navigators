@@ -14,20 +14,18 @@ public class RogueMap implements Screen {
 	private int screenHeight;
 	
 	public RogueMap(){
-		screenWidth = 80;
-		screenHeight = 21;
+		screenWidth = 37;
+		screenHeight = 19;
 		createWorld();
 	}
 	
 	private void createWorld(){
-		world = new WorldBuilder(90, 32)
-					.makeCaves()
-					.build();
+		world = new WorldBuilder(37, 19).makeShip().build();
 	}
 
-	public int getScrollX() { return Math.max(0, Math.min(centerX - screenWidth / 2, world.width() - screenWidth)); }
+	public int getScrollX() { return Math.max(0, Math.min(centerX - screenWidth / 2, world.getWidth() - screenWidth)); }
 	
-	public int getScrollY() { return Math.max(0, Math.min(centerY - screenHeight / 2, world.height() - screenHeight)); }
+	public int getScrollY() { return Math.max(0, Math.min(centerY - screenHeight / 2, world.getHeight() - screenHeight)); }
 	
 	@Override
 	public void displayOutput(AsciiPanel terminal) {
@@ -39,7 +37,7 @@ public class RogueMap implements Screen {
 		
 		terminal.write('X', centerX - left, centerY - top);
 		
-		terminal.writeCenter("-- press [escape] to lose or [enter] to win --", 22);
+		terminal.writeCenter("Indev Navigators Ship Overview - CCBY Jake Stanley", 22);
 	}
 
 	private void displayTiles(AsciiPanel terminal, int left, int top) {
@@ -47,15 +45,14 @@ public class RogueMap implements Screen {
 			for (int y = 0; y < screenHeight; y++){
 				int wx = x + left;
 				int wy = y + top;
-
 				terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
 			}
 		}
 	}
 	
 	private void scrollBy(int mx, int my){
-		centerX = Math.max(0, Math.min(centerX + mx, world.width() - 1));
-		centerY = Math.max(0, Math.min(centerY + my, world.height() - 1));
+		centerX = Math.max(0, Math.min(centerX + mx, world.getWidth() - 1));
+		centerY = Math.max(0, Math.min(centerY + my, world.getHeight() - 1));
 	}
 
 	@Override

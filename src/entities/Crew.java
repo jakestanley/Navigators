@@ -1,6 +1,6 @@
 package entities;
 
-/*
+/**
  *  The Crew class - Jacob Stanley, 2013 
  * 
  *  I would like age to be dynamic, with a date of birth, etc. I would prefer individual proficiencies, 
@@ -61,6 +61,6 @@ public class Crew {
 
 	public String getLastName(){
 		return lastName;
-	}
+	} // statistics, i.e age, locale, gender distribution, etc
 	
 }
