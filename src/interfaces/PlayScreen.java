@@ -16,7 +16,9 @@ public class PlayScreen implements Screen {
 		promptText = Game.player.getName() + "@" + Game.ship.getName() + " scsh $ ";
 	}
 
-	public void displayOutput(AsciiPanel terminal) {
+	public void displayOutput(AsciiPanel terminal) { // TODO split these writes into functions
+		terminal.write(" (M)AIN ", 1, 0, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" C(R)EW ", 10, 0, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 		terminal.write("Navigators", 1, 1);
 		terminal.write("Commander OS 0.12", 1, 2);
 		terminal.write("System ready", 1, 3);
@@ -32,8 +34,8 @@ public class PlayScreen implements Screen {
     public Screen respondToUserInput(KeyEvent key) {
         switch (key.getKeyCode()){
         case KeyEvent.VK_ENTER: // if user prompt key
-        	if(textPrompt){
-        		processUserInput();
+        	if(textPrompt){ // TODO this can be simpler and much more readable, etc, etc
+        		processUserInput(); // global?
         		textPrompt = false;
         		System.out.println("User input now false");
         	} else {

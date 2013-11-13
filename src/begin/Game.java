@@ -8,6 +8,7 @@ import interfaces.StartScreen;
 
 import javax.swing.JFrame;
 
+import entities.Crew;
 import entities.Player;
 import entities.Ship;
 import asciiPanel.AsciiPanel;
@@ -22,7 +23,7 @@ public class Game extends JFrame implements KeyListener { // implement applet la
  
     public Game(){
         super("Navigators"); // name of window - can this be run in a game window?
-        ship = new Ship();
+        initialiseShip();
         player = new Player();
         terminal = new AsciiPanel();
         add(terminal); // what does this do?
@@ -30,6 +31,16 @@ public class Game extends JFrame implements KeyListener { // implement applet la
         screen = new StartScreen();
         addKeyListener(this);
         repaint();
+    }
+    
+    public void initialiseShip(){
+    	ship = new Ship();
+    	ship.crewList.add(new Crew(21, "Jake", "Stanley"));
+    	ship.crewList.add(new Crew(22, "Jamie", "Hall"));
+    	ship.crewList.add(new Crew(21, "Matt", "Brown"));
+    	ship.crewList.add(new Crew(24, "James", "Birkett"));
+    	ship.crewList.add(new Crew(19, "Mark", "Bradley"));
+    	ship.crewList.add(new Crew(49, "Andy", "Wray"));
     }
     
     public void repaint(){

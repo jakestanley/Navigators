@@ -7,11 +7,13 @@ public class Ship {
 	private String name;
 	private float hullDamage;
 	private float shieldLevel;
+	public ArrayList<Crew> crewList; // TODO tidy this up
 	
 	public Ship(){
 		name = "exquisition";
 		hullDamage = 0;
 		shieldLevel = 100;
+		crewList = new ArrayList<Crew>();
 	}
 	
 	public String getName(){
