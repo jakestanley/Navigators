@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import modules.Module;
 
+/**
+ * The Ship class
+ * @author stanners
+ *
+ */
+
 public class Ship {
 
 	private String name;
@@ -61,6 +67,10 @@ public class Ship {
 		} else {
 			hullDamage = hullDamage - repair;
 		}
+	}
+	
+	public void addCrewMember(Crew crew){
+		crewList.add(crew);
 	}
 	
 }
