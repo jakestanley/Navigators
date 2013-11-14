@@ -2,6 +2,8 @@ package entities;
 
 import java.util.ArrayList;
 
+import modules.Module;
+
 public class Ship {
 
 	private String name;
@@ -9,12 +11,14 @@ public class Ship {
 	private float shieldLevel;
 	private float x, y, z; // improve.
 	public ArrayList<Crew> crewList; // TODO tidy this up
+	private ArrayList<Module> moduleList;
 	
 	public Ship(String name){
 		this.name = name;
 		hullDamage = 0;
 		shieldLevel = 100;
 		crewList = new ArrayList<Crew>();
+		moduleList = new ArrayList<Module>();
 	}
 	
 	public String getName(){
