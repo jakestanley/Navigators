@@ -22,7 +22,7 @@ public class CrewScreen implements Screen {
         case KeyEvent.VK_M:
         	return new PlayScreen();
         case KeyEvent.VK_P:
-        	return new RogueMap();
+        	return new ShipMap();
 		}
 		return this;
 	}

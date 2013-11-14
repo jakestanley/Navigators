@@ -7,14 +7,14 @@ import asciiPanel.AsciiPanel;
 import components.World;
 import components.WorldBuilder;
 
-public class RogueMap implements Screen {
+public class ShipMap implements Screen {
 	private World world;
 	private int centerX;
 	private int centerY;
 	private int screenWidth;
 	private int screenHeight;
 	
-	public RogueMap(){
+	public ShipMap(){
 		screenWidth = 37;
 		screenHeight = 19;
 		createWorld();

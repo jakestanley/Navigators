@@ -3,7 +3,7 @@ package begin;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import interfaces.RogueMap;
+import interfaces.ShipMap;
 import interfaces.Screen;
 import interfaces.StartScreen;
 
