@@ -30,8 +30,8 @@ public class Game extends JFrame implements KeyListener { // implement applet la
         terminal = new AsciiPanel();
         add(terminal); // what does this do?
         pack(); // what does this do?
-        screen = new StartScreen(); // for regular testing
-//        screen = new RogueMap(); // for map testing
+//        screen = new StartScreen(); // for regular testing
+        screen = new ShipMap(37, 19); // for map testing
         addKeyListener(this);
         repaint();
     }

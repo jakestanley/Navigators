@@ -7,26 +7,22 @@ import asciiPanel.AsciiPanel;
 import components.World;
 import components.WorldBuilder;
 
-public class ShipMap implements Screen {
-	private World world;
-	private int centerX;
-	private int centerY;
-	private int screenWidth;
-	private int screenHeight;
-	
-	public ShipMap(){
-		screenWidth = 37;
-		screenHeight = 19;
+/**
+ * The ShipMap class
+ * @author stanners
+ *
+ */
+
+public class ShipMap extends Map implements Screen {
+
+	public ShipMap(int width, int height){
+		super(width, height);
 		createWorld();
 	}
 	
 	private void createWorld(){
-		world = new WorldBuilder(37, 19).makeShip().build(); // TODO work out how to move the map.
+		world = new WorldBuilder(screenWidth, screenHeight).makeShip().build(); // TODO work out how to move the map.
 	}
-
-	public int getScrollX() { return Math.max(0, Math.min(centerX - screenWidth / 2, world.getWidth() - screenWidth)); }
-	
-	public int getScrollY() { return Math.max(0, Math.min(centerY - screenHeight / 2, world.getHeight() - screenHeight)); }
 	
 	@Override
 	public void displayOutput(AsciiPanel terminal) {
@@ -39,21 +35,6 @@ public class ShipMap implements Screen {
 		terminal.write('X', centerX - left, centerY - top);
 		
 		terminal.writeCenter("Indev Navigators Ship Overview - CCBY Jake Stanley", 21);
-	}
-
-	private void displayTiles(AsciiPanel terminal, int left, int top) {
-		for (int x = 0; x < screenWidth; x++){
-			for (int y = 0; y < screenHeight; y++){
-				int wx = x + left;
-				int wy = y + top;
-				terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
-			}
-		}
-	}
-	
-	private void scrollBy(int mx, int my){
-		centerX = Math.max(0, Math.min(centerX + mx, world.getWidth() - 1));
-		centerY = Math.max(0, Math.min(centerY + my, world.getHeight() - 1));
 	}
 
 	@Override

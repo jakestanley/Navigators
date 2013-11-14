@@ -64,7 +64,7 @@ public class PlayScreen implements Screen {
         			return new CrewScreen();
         		} else if(newLetter == "p".charAt(0)){
         			System.out.println("i was pressed");
-        			return new ShipMap();
+        			return new ShipMap(37, 19);
         		}
         		// use letters as usual
         	}
