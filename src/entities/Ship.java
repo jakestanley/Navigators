@@ -10,7 +10,7 @@ public class Ship {
 	private float hullDamage;
 	private float shieldLevel;
 	private float x, y, z; // improve.
-	public ArrayList<Crew> crewList; // TODO tidy this up
+	private ArrayList<Crew> crewList; // TODO tidy this up
 	private ArrayList<Module> moduleList;
 	
 	public Ship(String name){
