@@ -16,7 +16,8 @@ public class PlayScreen implements Screen {
 		promptText = Game.player.getName() + "@" + Game.ship.getName() + " scsh $ ";
 	}
 
-	public void displayOutput(AsciiPanel terminal) {
+	public void displayOutput(AsciiPanel terminal) { // TODO split these writes into functions
+		drawViewBar(terminal);
 		terminal.write("Navigators", 1, 1);
 		terminal.write("Commander OS 0.12", 1, 2);
 		terminal.write("System ready", 1, 3);
@@ -29,11 +30,11 @@ public class PlayScreen implements Screen {
         }
     }
  
-    public Screen respondToUserInput(KeyEvent key) {
+    public Screen respondToUserInput(KeyEvent key) { // TODO fix this up. it works, but it reads like shit.
         switch (key.getKeyCode()){
         case KeyEvent.VK_ENTER: // if user prompt key
-        	if(textPrompt){
-        		processUserInput();
+        	if(textPrompt){ // TODO this can be simpler and much more readable, etc, etc
+        		processUserInput(); // global?
         		textPrompt = false;
         		System.out.println("User input now false");
         	} else {
@@ -57,12 +58,14 @@ public class PlayScreen implements Screen {
         		} else {
         			System.out.println("Ignoring last input as it wasn't an acceptable char");
         		}
-        	} else {
+        	} else { // use letters as usual
         		if(newLetter == "r".charAt(0)){ // TODO make this not ugly...
-        			System.out.println("r was pressed");
         			return new CrewScreen();
+        		} else if(newLetter == "p".charAt(0)){
+        			return new ShipMap(37, 19);
+        		} else if(newLetter == "s".charAt(0)){
+        			return new SystemMap(100, 100);
         		}
-        		// use letters as usual
         	}
         	break;
         }
@@ -79,5 +82,14 @@ public class PlayScreen implements Screen {
     	System.out.println("Clearing...");
     	userInput = "";
     }
+
+	@Override
+	public void drawViewBar(AsciiPanel terminal) {
+		int line = Game.viewBarLine;
+		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
+		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" (S)YSTEM ", 27, line, terminal.brightWhite, terminal.red);
+	}
 
 }

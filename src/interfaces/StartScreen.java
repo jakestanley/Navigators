@@ -26,4 +26,10 @@ public class StartScreen implements Screen {
 		return key.getKeyCode() == KeyEvent.VK_ENTER ? new PlayScreen() : this;
 	}
 
+	@Override
+	public void drawViewBar(AsciiPanel terminal) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

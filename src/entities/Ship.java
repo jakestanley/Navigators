@@ -2,16 +2,29 @@ package entities;
 
 import java.util.ArrayList;
 
+import modules.Module;
+
+/**
+ * The Ship class
+ * @author stanners
+ *
+ */
+
 public class Ship {
 
 	private String name;
 	private float hullDamage;
 	private float shieldLevel;
+	private float x, y, z; // improve.
+	private ArrayList<Crew> crewList; // TODO tidy this up
+	private ArrayList<Module> moduleList;
 	
-	public Ship(){
-		name = "exquisition";
+	public Ship(String name){
+		this.name = name;
 		hullDamage = 0;
 		shieldLevel = 100;
+		crewList = new ArrayList<Crew>();
+		moduleList = new ArrayList<Module>();
 	}
 	
 	public String getName(){
@@ -54,6 +67,10 @@ public class Ship {
 		} else {
 			hullDamage = hullDamage - repair;
 		}
+	}
+	
+	public void addCrewMember(Crew crew){
+		crewList.add(crew);
 	}
 	
 }

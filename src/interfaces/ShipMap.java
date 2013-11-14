@@ -2,36 +2,31 @@ package interfaces;
 
 import java.awt.event.KeyEvent;
 
+import begin.Game;
 import asciiPanel.AsciiPanel;
 import components.World;
 import components.WorldBuilder;
 
-public class RogueMap implements Screen {
-	private World world;
-	private int centerX;
-	private int centerY;
-	private int screenWidth;
-	private int screenHeight;
-	
-	public RogueMap(){
-		screenWidth = 80;
-		screenHeight = 21;
+/**
+ * The ShipMap class
+ * @author stanners
+ *
+ */
+
+public class ShipMap extends Map implements Screen {
+
+	public ShipMap(int width, int height){
+		super(width, height);
 		createWorld();
 	}
 	
 	private void createWorld(){
-		world = new WorldBuilder(90, 32)
-					.makeCaves()
-					.build();
+		world = new WorldBuilder(worldWidth, worldHeight).makeShip().build(); // TODO work out how to move the map.
 	}
-
-	public int getScrollX() { return Math.max(0, Math.min(centerX - screenWidth / 2, world.width() - screenWidth)); }
-	
-	public int getScrollY() { return Math.max(0, Math.min(centerY - screenHeight / 2, world.height() - screenHeight)); }
 	
 	@Override
 	public void displayOutput(AsciiPanel terminal) {
-		
+		drawViewBar(terminal); 
 		int left = getScrollX();
 		int top = getScrollY(); 
 		
@@ -39,23 +34,7 @@ public class RogueMap implements Screen {
 		
 		terminal.write('X', centerX - left, centerY - top);
 		
-		terminal.writeCenter("-- press [escape] to lose or [enter] to win --", 22);
-	}
-
-	private void displayTiles(AsciiPanel terminal, int left, int top) {
-		for (int x = 0; x < screenWidth; x++){
-			for (int y = 0; y < screenHeight; y++){
-				int wx = x + left;
-				int wy = y + top;
-
-				terminal.write(world.glyph(wx, wy), x, y, world.color(wx, wy));
-			}
-		}
-	}
-	
-	private void scrollBy(int mx, int my){
-		centerX = Math.max(0, Math.min(centerX + mx, world.width() - 1));
-		centerY = Math.max(0, Math.min(centerY + my, world.height() - 1));
+		terminal.writeCenter("Indev Navigators Ship Overview - CCBY Jake Stanley", 21);
 	}
 
 	@Override
@@ -75,9 +54,21 @@ public class RogueMap implements Screen {
 		case KeyEvent.VK_U: scrollBy( 1,-1); break;
 		case KeyEvent.VK_B: scrollBy(-1, 1); break;
 		case KeyEvent.VK_N: scrollBy( 1, 1); break;
+		case KeyEvent.VK_M: return new PlayScreen();
+		case KeyEvent.VK_R: return new CrewScreen();
+        case KeyEvent.VK_S: return new SystemMap(100, 100); // TODO tidy up
 		}
 		
 		return this;
+	}
+
+	@Override
+	public void drawViewBar(AsciiPanel terminal) {
+		int line = Game.viewBarLine;
+		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
+		terminal.write(" (S)YSTEM ", 27, line, terminal.brightWhite, terminal.red);
 	}
 	
 }
