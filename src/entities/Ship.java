@@ -10,8 +10,8 @@ public class Ship {
 	private float x, y, z; // improve.
 	public ArrayList<Crew> crewList; // TODO tidy this up
 	
-	public Ship(){
-		name = "exquisition";
+	public Ship(String name){
+		this.name = name;
 		hullDamage = 0;
 		shieldLevel = 100;
 		crewList = new ArrayList<Crew>();

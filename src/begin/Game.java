@@ -37,7 +37,7 @@ public class Game extends JFrame implements KeyListener { // implement applet la
     }
     
     public void initialiseShip(){
-    	ship = new Ship();
+    	ship = new Ship("exquisition");
     	ship.crewList.add(new Crew(21, "Jake", "Stanley"));
     	ship.crewList.add(new Crew(22, "Jamie", "Hall"));
     	ship.crewList.add(new Crew(21, "Matt", "Brown"));
