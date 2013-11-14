@@ -10,7 +10,7 @@ public class CrewScreen implements Screen {
 
 	@Override
 	public void displayOutput(AsciiPanel terminal) {
-		// TODO Auto-generated method stub
+		drawViewBar(terminal);
 		terminal.write("Crew", 1, 1);
 		printCrewList(terminal);
 		printCrewStats(terminal, Game.ship.crewList.get(0));
@@ -18,12 +18,13 @@ public class CrewScreen implements Screen {
 
 	@Override
 	public Screen respondToUserInput(KeyEvent key) {
-		Screen screen = this;
 		switch (key.getKeyCode()){
         case KeyEvent.VK_M:
-        	screen = new PlayScreen();
+        	return new PlayScreen();
+        case KeyEvent.VK_P:
+        	return new RogueMap();
 		}
-		return screen;
+		return this;
 	}
 	
 	public void printCrewStats(AsciiPanel terminal, Crew member){
@@ -37,6 +38,14 @@ public class CrewScreen implements Screen {
 		for(int i = 0; i < Game.ship.crewList.size(); i++){
 			terminal.write(Game.ship.crewList.get(i).getSmartName(), 30, i + 1);
 		}
+	}
+
+	@Override
+	public void drawViewBar(AsciiPanel terminal) {
+		int line = Game.viewBarLine;
+		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
+		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 	}
 
 }

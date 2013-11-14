@@ -17,8 +17,7 @@ public class PlayScreen implements Screen {
 	}
 
 	public void displayOutput(AsciiPanel terminal) { // TODO split these writes into functions
-		terminal.write(" (M)AIN ", 1, 0, terminal.brightWhite, terminal.red); // TODO intelligent spacing
-		terminal.write(" C(R)EW ", 10, 0, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		drawViewBar(terminal);
 		terminal.write("Navigators", 1, 1);
 		terminal.write("Commander OS 0.12", 1, 2);
 		terminal.write("System ready", 1, 3);
@@ -31,7 +30,7 @@ public class PlayScreen implements Screen {
         }
     }
  
-    public Screen respondToUserInput(KeyEvent key) {
+    public Screen respondToUserInput(KeyEvent key) { // TODO fix this up. it works, but it reads like shit.
         switch (key.getKeyCode()){
         case KeyEvent.VK_ENTER: // if user prompt key
         	if(textPrompt){ // TODO this can be simpler and much more readable, etc, etc
@@ -63,7 +62,7 @@ public class PlayScreen implements Screen {
         		if(newLetter == "r".charAt(0)){ // TODO make this not ugly...
         			System.out.println("r was pressed");
         			return new CrewScreen();
-        		} else if(newLetter == "i".charAt(0)){
+        		} else if(newLetter == "p".charAt(0)){
         			System.out.println("i was pressed");
         			return new RogueMap();
         		}
@@ -84,5 +83,13 @@ public class PlayScreen implements Screen {
     	System.out.println("Clearing...");
     	userInput = "";
     }
+
+	@Override
+	public void drawViewBar(AsciiPanel terminal) {
+		int line = Game.viewBarLine;
+		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
+		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+	}
 
 }

@@ -2,6 +2,7 @@ package interfaces;
 
 import java.awt.event.KeyEvent;
 
+import begin.Game;
 import asciiPanel.AsciiPanel;
 import components.World;
 import components.WorldBuilder;
@@ -20,7 +21,7 @@ public class RogueMap implements Screen {
 	}
 	
 	private void createWorld(){
-		world = new WorldBuilder(37, 19).makeShip().build();
+		world = new WorldBuilder(37, 19).makeShip().build(); // TODO work out how to move the map.
 	}
 
 	public int getScrollX() { return Math.max(0, Math.min(centerX - screenWidth / 2, world.getWidth() - screenWidth)); }
@@ -29,7 +30,7 @@ public class RogueMap implements Screen {
 	
 	@Override
 	public void displayOutput(AsciiPanel terminal) {
-		
+		drawViewBar(terminal); 
 		int left = getScrollX();
 		int top = getScrollY(); 
 		
@@ -37,7 +38,7 @@ public class RogueMap implements Screen {
 		
 		terminal.write('X', centerX - left, centerY - top);
 		
-		terminal.writeCenter("Indev Navigators Ship Overview - CCBY Jake Stanley", 22);
+		terminal.writeCenter("Indev Navigators Ship Overview - CCBY Jake Stanley", 21);
 	}
 
 	private void displayTiles(AsciiPanel terminal, int left, int top) {
@@ -72,9 +73,19 @@ public class RogueMap implements Screen {
 		case KeyEvent.VK_U: scrollBy( 1,-1); break;
 		case KeyEvent.VK_B: scrollBy(-1, 1); break;
 		case KeyEvent.VK_N: scrollBy( 1, 1); break;
+		case KeyEvent.VK_M: return new PlayScreen();
+		case KeyEvent.VK_R: return new CrewScreen();
 		}
 		
 		return this;
+	}
+
+	@Override
+	public void drawViewBar(AsciiPanel terminal) {
+		int line = Game.viewBarLine;
+		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
 	}
 	
 }

@@ -17,6 +17,7 @@ import asciiPanel.AsciiPanel;
 public class Game extends JFrame implements KeyListener { // implement applet later 
 
 	private static final long serialVersionUID = 8475393520489155511L;
+	public static final int viewBarLine = 23;
 	public static Ship ship;
 	public static Player player;
     private AsciiPanel terminal;
@@ -29,8 +30,8 @@ public class Game extends JFrame implements KeyListener { // implement applet la
         terminal = new AsciiPanel();
         add(terminal); // what does this do?
         pack(); // what does this do?
-//        screen = new StartScreen(); // for map testing, TODO uncomment
-        screen = new RogueMap();
+        screen = new StartScreen(); // for regular testing
+//        screen = new RogueMap(); // for map testing
         addKeyListener(this);
         repaint();
     }
