@@ -2,7 +2,7 @@ package components;
 
 import java.awt.Color;
 
-public class World {
+public class World { // trysten
     private Tile[][] tiles;
     private int width;
     private int height;

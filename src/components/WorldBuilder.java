@@ -57,6 +57,19 @@ public class WorldBuilder {
 		return randomizeTiles().smooth(8);
 	}
 	
+	public WorldBuilder makeSystem(){
+		for(int x = 0; x < width; x++){
+			for(int y = 0; y < height; y++){
+				if(Math.random() < 0.1){
+					tiles[x][y] = Tile.ALLYSHIP;
+				} else {
+					tiles[x][y] = Tile.VOID;
+				}
+			}
+		}
+		return this;
+	}
+	
 	public WorldBuilder makeShip(){ // TODO upper and lower floors, i.e cargo/reactor deck, bridge deck
 		for (int x = 0; x < width; x++) { // writing void canvas to begin with
 			for (int y = 0; y < height; y++) {
