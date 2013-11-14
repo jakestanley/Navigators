@@ -21,7 +21,7 @@ public class ShipMap extends Map implements Screen {
 	}
 	
 	private void createWorld(){
-		world = new WorldBuilder(screenWidth, screenHeight).makeShip().build(); // TODO work out how to move the map.
+		world = new WorldBuilder(worldWidth, worldHeight).makeShip().build(); // TODO work out how to move the map.
 	}
 	
 	@Override
@@ -56,6 +56,7 @@ public class ShipMap extends Map implements Screen {
 		case KeyEvent.VK_N: scrollBy( 1, 1); break;
 		case KeyEvent.VK_M: return new PlayScreen();
 		case KeyEvent.VK_R: return new CrewScreen();
+        case KeyEvent.VK_S: return new SystemMap(100, 100); // TODO tidy up
 		}
 		
 		return this;
@@ -67,6 +68,7 @@ public class ShipMap extends Map implements Screen {
 		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
+		terminal.write(" (S)YSTEM ", 27, line, terminal.brightWhite, terminal.red);
 	}
 	
 }

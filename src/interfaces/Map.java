@@ -20,10 +20,14 @@ public class Map {
 	protected int centerY;
 	protected int screenWidth;
 	protected int screenHeight;
+	protected int worldWidth;
+	protected int worldHeight;
 	
-	public Map(int width, int height){
-		screenWidth = width;
-		screenHeight = height;
+	public Map(int worldWidth, int worldHeight){
+		this.screenWidth = 37; // not sure if this should be in the constructor
+		this.screenHeight = 19; // not sure if this should be in the constructor
+		this.worldWidth = worldWidth;
+		this.worldHeight = worldHeight;
 	}
 	
 	public int getScrollX(){

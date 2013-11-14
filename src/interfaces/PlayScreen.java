@@ -58,15 +58,14 @@ public class PlayScreen implements Screen {
         		} else {
         			System.out.println("Ignoring last input as it wasn't an acceptable char");
         		}
-        	} else {
+        	} else { // use letters as usual
         		if(newLetter == "r".charAt(0)){ // TODO make this not ugly...
-        			System.out.println("r was pressed");
         			return new CrewScreen();
         		} else if(newLetter == "p".charAt(0)){
-        			System.out.println("i was pressed");
         			return new ShipMap(37, 19);
+        		} else if(newLetter == "s".charAt(0)){
+        			return new SystemMap(100, 100);
         		}
-        		// use letters as usual
         	}
         	break;
         }
@@ -90,6 +89,7 @@ public class PlayScreen implements Screen {
 		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
 		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" (S)YSTEM ", 27, line, terminal.brightWhite, terminal.red);
 	}
 
 }

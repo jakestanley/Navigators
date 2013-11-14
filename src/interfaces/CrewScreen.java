@@ -23,6 +23,8 @@ public class CrewScreen implements Screen {
         	return new PlayScreen();
         case KeyEvent.VK_P:
         	return new ShipMap(37, 19);
+        case KeyEvent.VK_S: 
+        	return new SystemMap(100, 100);
 		}
 		return this;
 	}
@@ -46,6 +48,7 @@ public class CrewScreen implements Screen {
 		terminal.write(" (M)AIN ", 1, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.brightGreen); // TODO intelligent spacing
 		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
+		terminal.write(" (S)YSTEM ", 27, line, terminal.brightWhite, terminal.red);
 	}
 
 }
