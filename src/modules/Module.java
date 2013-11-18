@@ -50,11 +50,21 @@ package modules;
 
 public class Module { // i'm unsure... should this be an interface or a class?
 	
+	protected String moduleName;
+	
+	protected boolean isOn;
+	protected boolean isActive;
+	
 	protected String brand; // will probably use an int later. not sure... TODO
 	protected float currentOperatingPercentage; // anything over 100% will be risky - calculated by subclass.
 	protected float energyUsage; // this is the energy usage at 100% operation
+	protected float volume;
+	protected int sizeX;
+	protected int sizeY;
 	protected float roomTemperature; // measured in celsius
-	protected float condition; // max 100%. directly affects performance.
+	protected float condition; // max 100%. directly affects performance. -- maybe utils will be separate
+	protected float coolantLevel;
+	
 	
 	// GASES
 	protected float oxygenPercentage; // healthy to humans
@@ -67,5 +77,26 @@ public class Module { // i'm unsure... should this be an interface or a class?
 	protected float magmaPercentage;
 	protected float waterPercentage; // interferes greatly with electronics. this is liquid water.
 	protected float vacuumPercentage;
+	
+	public Module(){// constructor needs to be passed construction values
+		this.setOperatingPercentage(0);
+	}
+	
+	public String getModuleName(){
+		return moduleName;
+	}
+	
+	public boolean setOperatingPercentage(float perc){
+		boolean canSet = false;
+		if(!(perc < 0 || perc > 200)){
+			canSet = true;
+			currentOperatingPercentage = perc;
+		}
+		return canSet;
+	}
+	
+	public float getCurrentOperatingPercentage(){
+		return currentOperatingPercentage;
+	}
 
 }

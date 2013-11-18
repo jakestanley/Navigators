@@ -9,15 +9,22 @@ import interfaces.StartScreen;
 
 import javax.swing.JFrame;
 
+import components.Calculator;
+import components.Interpreter;
 import entities.Crew;
 import entities.Player;
 import entities.Ship;
 import asciiPanel.AsciiPanel;
  
 public class Game extends JFrame implements KeyListener { // implement applet later 
-
+/**
+ * function stuff and description on a postcard
+ * @param parametername parameter description.
+ * date modifierd
+ */
 	private static final long serialVersionUID = 8475393520489155511L;
 	public static final int viewBarLine = 23;
+	public static Interpreter interpreter;
 	public static Ship ship;
 	public static Player player;
     private AsciiPanel terminal;
@@ -30,7 +37,6 @@ public class Game extends JFrame implements KeyListener { // implement applet la
         terminal = new AsciiPanel();
         add(terminal); // what does this do?
         pack(); // what does this do?
-//        screen = new StartScreen(); // for regular testing
         screen = new ShipMap(37, 19); // for map testing
         addKeyListener(this);
         repaint();

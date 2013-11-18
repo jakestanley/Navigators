@@ -13,7 +13,7 @@ public class CrewScreen implements Screen {
 		drawViewBar(terminal);
 		terminal.write("Crew", 1, 1);
 		printCrewList(terminal);
-//		printCrewStats(terminal, Game.ship.crewList.get(0));
+		printCrewStats(terminal, Game.ship.crewList.get(0));
 	}
 
 	@Override
@@ -37,9 +37,9 @@ public class CrewScreen implements Screen {
 	
 	public void printCrewList(AsciiPanel terminal){
 		// TODO populate based on crew list
-//		for(int i = 0; i < Game.ship.crewList.size(); i++){ // fix
-//			terminal.write(Game.ship.crewList.get(i).getSmartName(), 30, i + 1);
-//		}
+		for(int i = 0; i < Game.ship.crewList.size(); i++){ // fix
+			terminal.write(Game.ship.crewList.get(i).getSmartName(), 30, i + 1);
+		}
 	}
 
 	@Override

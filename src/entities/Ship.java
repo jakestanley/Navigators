@@ -2,12 +2,17 @@ package entities;
 
 import java.util.ArrayList;
 
+import begin.Game;
 import modules.Module;
+import modules.Bridge;
+import modules.LifeSupport;
+import modules.Reactor;
+import modules.WarpGenerator;
 
 /**
  * The Ship class
  * @author stanners
- *
+ * 
  */
 
 public class Ship {
@@ -16,33 +21,28 @@ public class Ship {
 	private float hullDamage;
 	private float shieldLevel;
 	private float x, y, z; // improve.
-	private ArrayList<Crew> crewList; // TODO tidy this up
-	private ArrayList<Module> moduleList;
+	public ArrayList<Crew> crewList; // TODO tidy this up
+	public ArrayList<Module> moduleList;
 	
 	public Ship(String name){
+		x = 0;
+		y = 0;
+		z = 0;
 		this.name = name;
 		hullDamage = 0;
 		shieldLevel = 100;
 		crewList = new ArrayList<Crew>();
 		moduleList = new ArrayList<Module>();
+		
+		// init modules
+		moduleList.add(new Reactor());
+		moduleList.add(new LifeSupport());
+		moduleList.add(new Bridge());
+//		moduleList.add(new WarpGenerator(100));
 	}
 	
 	public String getName(){
 		return name;
-	}
-	
-	public String executeCommand(ArrayList<String> commands){
-		String command = commands.get(0).toLowerCase();
-		if(command.equals("attack")){
-			this.damageHull(1);
-		} else if(command.equals("repair")){
-			this.repairHull(1);
-		} else if(command.equals("quit")){
-			System.exit(0); 
-			// TODO deal with this in a better way. 
-			// TODO the ship class shouldn't handle command interpretation and definitely not exits
-		}
-		return null;
 	}
 	
 	public float getHullDamage(){
@@ -71,6 +71,28 @@ public class Ship {
 	
 	public void addCrewMember(Crew crew){
 		crewList.add(crew);
+	}
+	
+	public float getX(){
+		return x;
+	}
+	
+	public float getY(){
+		return y;
+	}
+	
+	public float getZ(){
+		return z;
+	}
+	
+	public WarpGenerator getWarpGenerator(){
+		WarpGenerator warper = null;
+		for(int i = 0; i < moduleList.size(); i++){
+			if(moduleList.get(i).getModuleName().equals("warp")){
+				warper = (WarpGenerator) moduleList.get(i);
+			}
+		}
+		return warper;
 	}
 	
 }

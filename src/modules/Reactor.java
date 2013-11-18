@@ -19,4 +19,9 @@ public class Reactor extends Module {
 	private float maximumFuelLevel;
 	private float currentFuelLevel;
 	
+	public Reactor(){
+		super();
+		moduleName = "reactor";
+	}
+	
 }

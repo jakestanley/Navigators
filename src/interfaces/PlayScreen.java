@@ -3,6 +3,8 @@ package interfaces;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import components.Calculator;
+import components.Interpreter;
 import begin.Game;
 import asciiPanel.AsciiPanel;
 
@@ -18,23 +20,29 @@ public class PlayScreen implements Screen {
 
 	public void displayOutput(AsciiPanel terminal) { // TODO split these writes into functions
 		drawViewBar(terminal);
-		terminal.write("Navigators", 1, 1);
+		terminal.write("Navigators", 1, 1); // TODO 
 		terminal.write("Commander OS 0.12", 1, 2);
 		terminal.write("System ready", 1, 3);
 		terminal.write("Hull damage: " + Game.ship.getHullDamage() + "%", 1, 5);
 		terminal.write("Shield charge: " + Game.ship.getShieldLevel() + "%", 1, 6);
+		terminal.write("Location X: " + Game.ship.getX(), 24, 5);
+		terminal.write("Location Y: " + Game.ship.getY(), 24, 6);
+		terminal.write("Location Z: " + Game.ship.getZ(), 24, 7);
         if(textPrompt){
         	terminal.write(promptText + userInput + "_", 1, 20);
         } else {
         	terminal.write(promptText, 1, 20);
         }
+        drawModuleList(terminal, 10);
+        terminal.write(Calculator.calculateJourneyTime(Game.ship, 1000), 1, 8);
     }
  
     public Screen respondToUserInput(KeyEvent key) { // TODO fix this up. it works, but it reads like shit.
         switch (key.getKeyCode()){
         case KeyEvent.VK_ENTER: // if user prompt key
         	if(textPrompt){ // TODO this can be simpler and much more readable, etc, etc
-        		processUserInput(); // global?
+        		Interpreter.executeCommand(Game.ship, userInput);
+        		userInput = "";
         		textPrompt = false;
         		System.out.println("User input now false");
         	} else {
@@ -71,17 +79,6 @@ public class PlayScreen implements Screen {
         }
         return this;
     }
-    
-    public void processUserInput(){
-    	ArrayList<String> commands = new ArrayList<String>();
-    	System.out.println("Processing user input string: " + userInput);
-		for(String word: userInput.split(" ")){ // splits by space
-			commands.add(word);
-		}
-    	Game.ship.executeCommand(commands);
-    	System.out.println("Clearing...");
-    	userInput = "";
-    }
 
 	@Override
 	public void drawViewBar(AsciiPanel terminal) {
@@ -90,6 +87,13 @@ public class PlayScreen implements Screen {
 		terminal.write(" C(R)EW ", 10, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 		terminal.write(" MA(P) ", 19, line, terminal.brightWhite, terminal.red); // TODO intelligent spacing
 		terminal.write(" (S)YSTEM ", 27, line, terminal.brightWhite, terminal.red);
+	}
+	
+	public void drawModuleList(AsciiPanel terminal, int startLine) {
+		terminal.write("Installed modules: ", 1, startLine);
+		for(int i = 0; i < Game.ship.moduleList.size(); i++){
+			terminal.write(Game.ship.moduleList.get(i).getModuleName(), 1, i + startLine + 1);
+		}
 	}
 
 }

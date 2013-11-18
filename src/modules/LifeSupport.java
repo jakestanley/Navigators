@@ -48,7 +48,12 @@ package modules;
 
 public class LifeSupport extends Module {
 
-	private float oxygenCapacity;
-	private float oxygenLevel;
+	private float oxygenCapacity; // reserves?
+	private float oxygenLevel; // reserves?
+	
+	public LifeSupport(){
+		super();
+		moduleName = "life support";
+	}
 	
 }
